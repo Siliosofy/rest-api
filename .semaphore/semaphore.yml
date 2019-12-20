@@ -10,13 +10,10 @@ blocks:
       jobs:
         - name: Eslint
           commands:
-            - cache store
-            - npm run eslint -s
+            - npm run eslint
         - name: Tests
           commands:
-            - cache restore
-            - npm run test -s
-            - cache store
+            - npm run test
       prologue:
         commands:
           - checkout
