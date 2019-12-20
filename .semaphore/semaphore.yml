@@ -10,9 +10,11 @@ blocks:
       jobs:
         - name: Eslint
           commands:
+            - cache restore
             - npm run eslint
         - name: Tests
           commands:
+            - cache restore
             - npm run test
       prologue:
         commands:
@@ -20,5 +22,6 @@ blocks:
           - sem-version node 13.3.0
           - cache restore
           - npm install
+          - cache store
       secrets:
         - name: envvars
