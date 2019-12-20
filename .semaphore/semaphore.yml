@@ -17,7 +17,7 @@ blocks:
       prologue:
         commands:
           - checkout
-          - sem-version node 13.3.1
+          - sem-version node 13.3.0
           - cache restore
           - npm install
       secrets:
