@@ -11,11 +11,11 @@ blocks:
         - name: Eslint
           commands:
             - cache restore
-            - npm run eslint
+            - npm run eslint -s
         - name: Tests
           commands:
             - cache restore
-            - npm run test
+            - npm run test -s
       prologue:
         commands:
           - checkout
