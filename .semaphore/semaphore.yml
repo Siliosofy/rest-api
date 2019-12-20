@@ -4,17 +4,20 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-
 blocks:
-  - name: Test
+  - name: ''
     task:
       jobs:
-        - name: Test
+        - name: Eslint
           commands:
-            - checkout
-            - sem-version node 12
-            - cache restore
-            - npm install
             - cache store
-            - npm run build --if-present
+            - npm eslint
+        - name: Run Tests
+          commands:
             - npm test
+      prologue:
+        commands:
+          - checkout
+          - sem-version node 13
+          - cache restore
+          - npm install
