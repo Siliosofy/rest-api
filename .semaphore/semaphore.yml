@@ -8,14 +8,19 @@ blocks:
   - name: Tests
     task:
       jobs:
-        - name: Unit tests
+        - name: Eslint
           commands:
+            - cache store
             - npm run eslint -s
-            - npm run tests -s
+        - name: Tests
+          commands:
+            - cache restore
+            - npm run test -s
+            - cache store
       prologue:
         commands:
           - checkout
-          - sem-version node 13
+          - sem-version node 13.3.1
           - cache restore
           - npm install
       secrets:
