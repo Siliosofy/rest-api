@@ -5,19 +5,18 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: ''
+  - name: Tests
     task:
       jobs:
-        - name: Eslint
+        - name: Unit tests
           commands:
-            - cache store
-            - npm eslint
-        - name: Run Tests
-          commands:
-            - npm test
+            - npm run eslint -s
+            - npm run tests -s
       prologue:
         commands:
           - checkout
           - sem-version node 13
           - cache restore
           - npm install
+      secrets:
+        - name: envvars
