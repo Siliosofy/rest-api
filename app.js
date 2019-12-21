@@ -25,6 +25,7 @@ const service = () => {
         this.log.info('Creating server');
         this.server = await http.createServer(this.express);
         this.log.info('Server creation: Status SUCCESS');
+        return this.server;
       }
       catch (error) {
         this.log.error('Server creation: Status FAILED');
