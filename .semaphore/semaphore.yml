@@ -1,18 +1,21 @@
 version: v1.0
-name: Test MyApp
+name: rest-api-pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  containers:
+    - name: main
+      image: 'semaphoreci/ubuntu:18.04'
 blocks:
-  - name: Tests
+  - name: Run tests
     task:
       jobs:
-        - name: Eslint
+        - name: Run Eslint
           commands:
             - cache restore
             - npm run eslint -s
-        - name: Tests
+        - name: NPM Test
           commands:
             - cache restore
             - npm run test -s
@@ -25,3 +28,5 @@ blocks:
           - cache store
       secrets:
         - name: env
+execution_time_limit:
+  minutes: 7
