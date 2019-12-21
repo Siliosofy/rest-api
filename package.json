@@ -45,6 +45,9 @@
     "jest": "^24.9.0",
     "supertest": "^4.0.2"
   },
+  "jest": {
+    "setupFiles": ["dotenv/config"]
+  },
   "engines": {
     "node": "13.x"
   },
