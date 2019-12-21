@@ -25,7 +25,9 @@ const init = () => {
 
     transports: [
       new transports.Console({
-        colorize: true
+        name: 'console',
+        colorize: true,
+        showLevel: true
       }),
 
       new DailyRotateFile({
