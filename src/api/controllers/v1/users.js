@@ -1,4 +1,4 @@
-const Users = require('../models/users');
+const Users = require('../../models/users');
 const helper = require('../../../utils/helpers');
 
 const users = {
@@ -21,7 +21,7 @@ const users = {
     const patient = new Users({
       username,
       password: await helper.hashPassword(password),
-      email
+      email,
     });
     const result = await patient.save();
     return result;
@@ -34,8 +34,8 @@ const users = {
       $set: {
         username,
         password,
-        email
-      }
+        email,
+      },
     });
     return result;
   },
@@ -44,7 +44,7 @@ const users = {
   delete: async (id) => {
     const result = await Users.remove({ _id: id });
     return result;
-  }
+  },
 };
 
 module.exports = users;

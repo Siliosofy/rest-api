@@ -1,4 +1,4 @@
-const Users = require('../models/users');
+const Users = require('../../models/users');
 const helper = require('../../../utils/helpers');
 
 // LOGIN VALIDATION
@@ -12,7 +12,7 @@ const login = async (data) => {
   if (isValid) {
     const response = {
       accessToken: helper.generateAccessToken(userData),
-      refreshToken: helper.generateRefreshAccessToken(userData)
+      refreshToken: helper.generateRefreshAccessToken(userData),
     };
     return response;
   }
@@ -21,5 +21,5 @@ const login = async (data) => {
 };
 
 module.exports = {
-  login
+  login,
 };
