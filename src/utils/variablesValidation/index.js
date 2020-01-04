@@ -6,7 +6,7 @@ const requiredVariables = [
   'DB_SCHEMA',
   'NODE_ENV',
   'SERVICE_NAME',
-  'PORT'
+  'PORT',
 ];
 
 const validate = (logger) => {
@@ -19,16 +19,14 @@ const validate = (logger) => {
     if (notFound) {
       logger.error(`Variable [${variable}] missing`);
       success = false;
-    }
-    else {
+    } else {
       logger.info(`Variable [${variable}] set`);
     }
   });
 
   if (success) {
     logger.info('Env variables initialization SUCCESS.');
-  }
-  else {
+  } else {
     logger.error('Env variables initialization FAILED.');
     logger.error('One or more env variables are not properly set, please check .env file');
     throw new Error('One or more env variables are not properly set, please check .env file');
@@ -37,5 +35,5 @@ const validate = (logger) => {
 };
 
 module.exports = {
-  validate
+  validate,
 };
