@@ -2,6 +2,7 @@ const Koa = require('koa');
 const cors = require('koa2-cors');
 const helmet = require('koa-helmet');
 const mask = require('koa-json-mask');
+const bodyParser = require('koa-bodyparser');
 // Middlewares
 const middlewares = require('./middlewares');
 // v1 route imports
@@ -41,7 +42,7 @@ const init = (logger) => {
   // Allow pretty print via pretty=true querystring
   // Pretty printed json will NOT be cached
   app.use(middlewares.prettyJSON({
-    pretty: false,
+    pretty: true,
     param: {
       pretty: true,
     },
@@ -51,9 +52,11 @@ const init = (logger) => {
   logger.info('Setting Mask');
   app.use(mask({ name: 'filter' }));
 
+  app.use(bodyParser());
+
   // v1 routes
-  // app.use(v1Routes.loginRoutes.routes());
-  // app.use(v1Routes.usersRoutes.routes());
+  app.use(v1Routes.login.routes());
+  app.use(v1Routes.users.routes());
   app.use(v1Routes.health.routes());
 
   if (!app) {

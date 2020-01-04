@@ -1,7 +1,7 @@
 // Users Endpoints
-
 const Router = require('@koa/router');
 const controllers = require('../../controllers/v1');
+
 
 const usersRoutes = new Router({ prefix: '/api/v1' });
 
@@ -18,21 +18,9 @@ usersRoutes.post('/users', controllers.users.add);
 usersRoutes.patch('/users/:id', controllers.users.update);
 
 // Delete a specific user
-usersRoutes.del('/users/:id', controllers.users.delete);
+usersRoutes.del('/users/:id', controllers.users.remove);
 
 module.exports = usersRoutes;
-
-
-// // GET ALL THE RECORDS
-// router.get('/:resource', async (req, res) => {
-//   const { resource } = req.params;
-//   try {
-//     const data = await controllers[resource].find();
-//     res.status(200).json(data);
-//   } catch (error) {
-//     res.status(404).json({ message: error.message });
-//   }
-// });
 
 // // SUBMITS NEW RECORD
 // router.post('/:resource', async (req, res) => {

@@ -1,7 +1,7 @@
 // Health Endpoints
-
 const Router = require('@koa/router');
 const controller = require('../../controllers/v1');
+
 
 const healthRoutes = new Router({ prefix: '/api/v1' });
 
