@@ -7,10 +7,7 @@ let logger = null;
 const init = () => {
   if (logger) return logger;
 
-  const {
-    LOG_LEVEL,
-    SERVICE_NAME
-  } = process.env;
+  const { LOG_LEVEL, SERVICE_NAME } = process.env;
 
   logger = createLogger({
     level: LOG_LEVEL,
@@ -20,32 +17,31 @@ const init = () => {
     format: format.combine(
       format.simple(),
       format.timestamp(),
-      format.printf((data) => `[${data.timestamp}] - [${data.level.toUpperCase()}] - [${SERVICE_NAME}] - ${data.message}`)
+      format.printf((data) => `[${data.timestamp}] - [${data.level.toUpperCase()}] - [${SERVICE_NAME}] - ${data.message}`),
     ),
 
     transports: [
       new transports.Console({
-        colorize: true
+        colorize: true,
       }),
 
       new DailyRotateFile({
         handleExceptions: true,
         humanReadableUnhandledException: true,
         json: false,
-        filename: path.join(__dirname, '../../logs/', `${SERVICE_NAME}-%DATE%.log`),
+        filename: path.join(__dirname, '../../../logs/', `${SERVICE_NAME}-%DATE%.log`),
         datePattern: 'YYYY-MM-DD-HH',
         timestamp: true,
         maxSize: '5m',
         maxFiles: '5d',
-        colorize: true
-      })
-    ]
+        colorize: true,
+      }),
+    ],
   });
 
   if (logger) {
     logger.info('Logger initialization SUCCESS.');
-  }
-  else {
+  } else {
     throw new Error('Logger initialization FAIL.');
   }
 
@@ -53,5 +49,5 @@ const init = () => {
 };
 
 module.exports = {
-  init
+  init,
 };

@@ -1,8 +1,8 @@
 const http = require('http');
 const logger = require('./utils/logger');
 const environmentVariables = require('./utils/variablesValidation');
-const dataBase = require('./src/database');
-const api = require('./src/api');
+const dataBase = require('./database');
+const api = require('./api');
 
 const service = () => {
   this.log = null;
@@ -16,25 +16,24 @@ const service = () => {
 
     setupMongoDB: async () => dataBase.init(this.log),
 
-    setupExpress: async () => {
-      this.express = await api.init(this.log);
+    setupServerAPI: async () => {
+      this.serverAPI = await api.init(this.log);
     },
 
     createService: async () => {
       try {
         this.log.info('Creating server');
-        this.server = await http.createServer(this.express);
+        this.server = await http.createServer(this.serverAPI);
         this.log.info('Server creation: Status SUCCESS');
-      }
-      catch (error) {
+      } catch (error) {
         this.log.error('Server creation: Status FAILED');
         throw new Error(error);
       }
     },
 
     startService: () => {
-      this.server.listen(this.express.get('port'));
-      this.log.info('Server Status UP');
+      this.server.listen(process.env.PORT);
+      this.log.info(`Server Listening on PORT ${process.env.PORT}`);
       return Promise.resolve();
     },
 
@@ -42,7 +41,7 @@ const service = () => {
       this.server.close();
       this.log.info('Server Status Stopped');
       return Promise.resolve();
-    }
+    },
   };
 };
 
